@@ -1,0 +1,259 @@
+{
+    "allData": [
+        {
+            "userId": "101",
+            "name": "Sarah Johnson",
+            "profilepicture": "assets/images/people/1/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/1/photo_2.jpg",
+            "userIcon": "assets/images/people/1/photo_3.jpg",
+            "introduction": "Certified yoga instructor with 8 years of experience. Specializing in Vinyasa and Hatha yoga. Passionate about helping others find inner peace through mindful movement.",
+            "signature": "Find your balance, find your peace",
+            "tag": "Vinyasa, Hatha, Mindfulness",
+            "post":[
+                {
+                    "postId": "1001",
+                    "message": "Morning flow to energize your day! This sequence combines strength and flexibility for a perfect start.",
+                    "videoUrl": "assets/images/people/1/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "102",
+            "name": "Michael Chen",
+            "profilepicture": "assets/images/people/2/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/2/photo_2.jpg",
+            "userIcon": "assets/images/people/2/photo_3.jpg",
+            "introduction": "Yoga practitioner for 12 years, focusing on Power Yoga and Meditation. Former athlete turned yoga teacher, helping others achieve peak performance.",
+            "signature": "Strength through stillness",
+            "tag": "Power Yoga, Meditation, Athletic Performance",
+            "post": [
+                {
+                    "postId": "2001",
+                    "message": "Power yoga sequence for building core strength and mental focus.",
+                    "videoUrl": "assets/images/people/2/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "103",
+            "name": "Emma Rodriguez",
+            "profilepicture": "assets/images/people/3/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/3/photo_2.jpg",
+            "userIcon": "assets/images/people/3/photo_3.jpg",
+            "introduction": "Gentle and Restorative yoga specialist. Dedicated to supporting women with nurturing practices.",
+            "signature": "Nurturing body and soul",
+            "tag": "Gentle Yoga, Restorative, Wellness",
+            "post": [
+                {
+                    "postId": "3001",
+                    "message": "Gentle flow sequence - focusing on hip opening and relaxation.",
+                    "videoUrl": "assets/images/people/3/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "104",
+            "name": "David Kim",
+            "profilepicture": "assets/images/people/4/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/4/photo_2.jpg",
+            "userIcon": "assets/images/people/4/photo_3.jpg",
+            "introduction": "Ashtanga yoga practitioner and teacher. Combining traditional practices with modern approaches for optimal results.",
+            "signature": "Tradition meets innovation",
+            "tag": "Ashtanga, Traditional Yoga, Modern Practice",
+            "post": [
+                {
+                    "postId": "4001",
+                    "message": "Primary Series breakdown - perfect for beginners and intermediate practitioners.",
+                    "videoUrl": "assets/images/people/4/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "105",
+            "name": "Sophie Anderson",
+            "profilepicture": "assets/images/people/5/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/5/photo_2.jpg",
+            "userIcon": "assets/images/people/5/photo_3.jpg",
+            "introduction": "Yin Yoga and Meditation specialist. Helping busy professionals find balance through deep stretching and mindfulness.",
+            "signature": "Slow down to speed up",
+            "tag": "Yin Yoga, Meditation, Stress Relief",
+            "post": [
+                {
+                    "postId": "5001",
+                    "message": "30-minute yin sequence for deep hip opening and stress relief.",
+                    "videoUrl": "assets/images/people/5/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "106",
+            "name": "James Wilson",
+            "profilepicture": "assets/images/people/6/photo_1.jpeg",
+            "profilepictureBg": "assets/images/people/6/photo_2.jpeg",
+            "userIcon": "assets/images/people/6/photo_3.jpeg",
+            "introduction": "AcroYoga and Partner Yoga expert. Creating connection through movement and trust-building exercises.",
+            "signature": "Together we rise",
+            "tag": "AcroYoga, Partner Yoga, Connection",
+            "post": [
+                {
+                    "postId": "6001",
+                    "message": "Beginner-friendly AcroYoga sequence for building trust and connection.",
+                    "videoUrl": "assets/images/people/6/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "107",
+            "name": "Maria Garcia",
+            "profilepicture": "assets/images/people/7/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/7/photo_2.jpg",
+            "userIcon": "assets/images/people/7/photo_3.jpg",
+            "introduction": "Kundalini Yoga teacher and Energy Healing practitioner. Specializing in chakra balancing and spiritual growth.",
+            "signature": "Awaken your inner light",
+            "tag": "Kundalini, Energy Healing, Spiritual Growth",
+            "post": [
+                {
+                    "postId": "7001",
+                    "message": "Morning Kundalini kriya for energy activation and spiritual awakening.",
+                    "videoUrl": "assets/images/people/7/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "108",
+            "name": "Alex Thompson",
+            "profilepicture": "assets/images/people/8/photo_1.jpeg",
+            "profilepictureBg": "assets/images/people/8/photo_2.jpeg",
+            "userIcon": "assets/images/people/8/photo_3.jpeg",
+            "introduction": "Hot Yoga and Core Power specialist. Helping athletes enhance performance through heat-based practices.",
+            "signature": "Heat transforms",
+            "tag": "Hot Yoga, Core Power, Athletic Performance",
+            "post": [
+                {
+                    "postId": "8001",
+                    "message": "Intense hot yoga flow for building strength and endurance.",
+                    "videoUrl": "assets/images/people/8/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "109",
+            "name": "Lisa Chen",
+            "profilepicture": "assets/images/people/9/photo_1.png",
+            "profilepictureBg": "assets/images/people/9/photo_2.png",
+            "userIcon": "assets/images/people/9/photo_3.png",
+            "introduction": "Yoga for Wellness and Movement specialist. Creating sequences for better body awareness.",
+            "signature": "Move with awareness",
+            "tag": "Wellness Yoga, Movement, Body Awareness",
+            "post": [
+                {
+                    "postId": "9001",
+                    "message": "Gentle sequence for back care and prevention.",
+                    "videoUrl": "assets/images/people/9/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "110",
+            "name": "Ryan Patel",
+            "profilepicture": "assets/images/people/10/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/10/photo_2.jpg",
+            "userIcon": "assets/images/people/10/photo_3.jpg",
+            "introduction": "Aerial Yoga and Flexibility expert. Combining traditional yoga with aerial arts for unique experiences.",
+            "signature": "Defy gravity, embrace freedom",
+            "tag": "Aerial Yoga, Flexibility, Aerial Arts",
+            "post": [
+                {
+                    "postId": "10001",
+                    "message": "Beginner aerial yoga sequence - learn to trust the hammock and your body.",
+                    "videoUrl": "assets/images/people/10/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "111",
+            "name": "Nina Williams",
+            "profilepicture": "assets/images/people/11/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/11/photo_2.jpg",
+            "userIcon": "assets/images/people/11/photo_3.jpg",
+            "introduction": "Yoga for Kids and Family Yoga specialist. Making yoga fun and accessible for all ages.",
+            "signature": "Play, learn, grow together",
+            "tag": "Kids Yoga, Family Yoga, Fun Practice",
+            "post": [
+                {
+                    "postId": "11001",
+                    "message": "Fun family yoga sequence - perfect for parents and children to practice together.",
+                    "videoUrl": "assets/images/people/11/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "112",
+            "name": "Daniel Lee",
+            "profilepicture": "assets/images/people/12/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/12/photo_2.jpg",
+            "userIcon": "assets/images/people/12/photo_3.jpg",
+            "introduction": "Yoga for Seniors and Gentle Yoga specialist. Creating accessible practices for all abilities.",
+            "signature": "Age is just a number",
+            "tag": "Senior Yoga, Gentle Yoga, Accessibility",
+            "post": [
+                {
+                    "postId": "12001",
+                    "message": "Gentle chair yoga sequence for seniors - focusing on mobility and balance.",
+                    "videoUrl": "assets/images/people/12/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "113",
+            "name": "Olivia Martinez",
+            "profilepicture": "assets/images/people/13/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/13/photo_2.jpg",
+            "userIcon": "assets/images/people/13/photo_3.jpg",
+            "introduction": "Mindfulness and Relaxation specialist. Using yoga as a tool for inner peace.",
+            "signature": "Peace begins within",
+            "tag": "Mindfulness, Relaxation, Inner Peace",
+            "post": [
+                {
+                    "postId": "13001",
+                    "message": "Relaxation sequence with breathing techniques and gentle movement.",
+                    "videoUrl": "assets/images/people/13/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "114",
+            "name": "Marcus Johnson",
+            "profilepicture": "assets/images/people/14/photo_1.png",
+            "profilepictureBg": "assets/images/people/14/photo_2.png",
+            "userIcon": "assets/images/people/14/photo_3.png",
+            "introduction": "Yoga for Athletes and Sports Performance specialist. Helping athletes enhance their game through yoga.",
+            "signature": "Elevate your game",
+            "tag": "Sports Yoga, Athletic Performance, Recovery",
+            "post": [
+                {
+                    "postId": "14001",
+                    "message": "Pre-game yoga sequence for athletes - focus on mobility and mental preparation.",
+                    "videoUrl": "assets/images/people/14/video_1.mp4"
+                }
+            ]
+        },
+        {
+            "userId": "115",
+            "name": "Aisha Khan",
+            "profilepicture": "assets/images/people/15/photo_1.jpg",
+            "profilepictureBg": "assets/images/people/15/photo_2.jpg",
+            "userIcon": "assets/images/people/15/photo_3.jpg",
+            "introduction": "Yoga Philosophy and Meditation specialist. Deepening understanding of yoga's ancient wisdom.",
+            "signature": "Wisdom through practice",
+            "tag": "Yoga Philosophy, Meditation, Ancient Wisdom",
+            "post": [
+                {
+                    "postId": "15001",
+                    "message": "Meditation and philosophy session - exploring the deeper aspects of yoga practice.",
+                    "videoUrl": "assets/images/people/15/video_1.mp4"
+                }
+            ]
+        }
+    ]
+}

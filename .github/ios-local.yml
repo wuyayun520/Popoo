@@ -1,0 +1,44 @@
+name: Upload iOS App to App Store
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 合并文件片段
+    - name: Merge IPA parts
+      run: |
+        cat uploadtest/popoo.ipa.part* > uploadtest/popoo.ipa
+
+    # 验证文件完整性
+    - name: Verify file integrity
+      run: |
+        EXPECTED_MD5=""
+        ACTUAL_MD5=$(md5 -q uploadtest/popoo.ipa)
+        
+        if [ "$EXPECTED_MD5" != "$ACTUAL_MD5" ]; then
+          echo "IPA file integrity check failed"
+          exit 1
+        fi
+
+    # 上传到 App Store
+    - name: Upload to App Store using altool
+      env:
+        IPA_PATH: "uploadtest/popoo.ipa"
+        APPLE_ID: "zhuoweikun@abcomptoirdu.shop"
+        APP_SPECIFIC_PASSWORD: ""
+      run: |
+        xcrun altool --upload-app -f "$IPA_PATH" \
+          -t ios \
+          -u "$APPLE_ID" \
+          -p "$APP_SPECIFIC_PASSWORD" \
+          --verbose
+
