@@ -36,13 +36,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to camera to take your profile picture</string>
+	<string>Popoo needs to use the camera permission to take pictures while chatting</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app needs microphone access for camera functionality</string>
+	<string>Popoo needs to access the microphone to record audio information for users to have voice chats or video calls.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to your photo library to select your profile picture</string>
+	<string>Popoo needs to access your photo library for chatting, sending pictures and modifying user avatars</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This app track your activity across other companies' apps and websites to provide you with a personalized experience</string>
+	<string>Popoo track your activity across other companies' apps and websites to provide you with a personalized experience</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

@@ -89,7 +89,7 @@ class _SuppliersModuleState extends State<SuppliersModule> {
     }
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 0, right: 0, bottom: 0),
+        padding: const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -118,94 +118,7 @@ class _SuppliersModuleState extends State<SuppliersModule> {
                 separatorBuilder: (_, __) => const SizedBox(width: 16),
                 itemBuilder: (context, index) {
                   final course = _randomCourses[index];
-                  return GestureDetector(
-                    onTap: () => _showVideo(context, course.videoUrl),
-                    child: Container(
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
-                            child: Stack(
-                              children: [
-                                Image.asset(
-                                  course.cover,
-                                  width: 120,
-                                  height: 80,
-                                  fit: BoxFit.cover,
-                                ),
-                                Positioned.fill(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                          Colors.transparent,
-                                          Colors.black.withOpacity(0.3),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned.fill(
-                                  child: Center(
-                                    child: Container(
-                                      width: 32,
-                                      height: 32,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.5),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: const Icon(
-                                        Icons.play_arrow,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                            child: Text(
-                              course.title.split(' ').take(3).join(' '),
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Row(
-                              children: List.generate(5, (i) => Icon(
-                                i < course.rating ? Icons.star : Icons.star_border,
-                                color: const Color(0xFFFFB800),
-                                size: 18,
-                              )),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return _HorizontalCourseCard(course: course, onPlay: () => _showVideo(context, course.videoUrl));
                 },
               ),
             ),
@@ -375,6 +288,15 @@ class _StackedDraggableCardsState extends State<_StackedDraggableCards> {
                           videoUrl: _playingVideoUrl,
                           onPlay: () => _onPlay(course.videoUrl),
                           onCloseVideo: _onCloseVideo,
+                          onReport: () {
+                            setState(() {
+                              _isPlaying = false;
+                              _playingVideoUrl = null;
+                              if (_cardStack.length > 1) {
+                                _cardStack.removeLast();
+                              }
+                            });
+                          },
                         ),
                       ),
                     )
@@ -386,6 +308,7 @@ class _StackedDraggableCardsState extends State<_StackedDraggableCards> {
                       videoUrl: null,
                       onPlay: null,
                       onCloseVideo: null,
+                      onReport: null,
                     ),
             ),
           );
@@ -403,7 +326,57 @@ class _CourseCard extends StatelessWidget {
   final String? videoUrl;
   final VoidCallback? onPlay;
   final VoidCallback? onCloseVideo;
-  const _CourseCard({required this.course, required this.width, required this.height, required this.isPlaying, this.videoUrl, this.onPlay, this.onCloseVideo});
+  final VoidCallback? onReport;
+  const _CourseCard({required this.course, required this.width, required this.height, required this.isPlaying, this.videoUrl, this.onPlay, this.onCloseVideo, this.onReport});
+
+  void _showReportDialog(BuildContext context) async {
+    final reasons = [
+      'Spam',
+      'Inappropriate Content',
+      'Harassment',
+      'Other',
+    ];
+    String? selectedReason;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => AlertDialog(
+          title: const Text('Report Work'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...reasons.map((reason) => RadioListTile<String>(
+                    title: Text(reason),
+                    value: reason,
+                    groupValue: selectedReason,
+                    onChanged: (val) {
+                      setState(() {
+                        selectedReason = val;
+                      });
+                    },
+                  )),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: selectedReason == null ? null : () => Navigator.pop(ctx, true),
+              child: const Text('Report'),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (confirmed == true && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Report submitted successfully.'), backgroundColor: Colors.orange),
+      );
+      if (onReport != null) onReport!();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -420,45 +393,62 @@ class _CourseCard extends StatelessWidget {
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: isPlaying && videoUrl != null
-            ? Stack(
-                children: [
-                  _VideoPlayerInline(videoUrl: videoUrl!),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white),
-                      onPressed: onCloseVideo,
-                    ),
-                  ),
-                ],
-              )
-            : Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    course.cover,
-                    width: width,
-                    height: height,
-                    fit: BoxFit.cover,
-                  ),
-                  GestureDetector(
-                    onTap: onPlay,
-                    child: Container(
-                      width: 64,
-                      height: 64,
-                      decoration: BoxDecoration(
-                        color: Colors.black38,
-                        shape: BoxShape.circle,
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: isPlaying && videoUrl != null
+                ? Stack(
+                    children: [
+                      _VideoPlayerInline(videoUrl: videoUrl!),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: IconButton(
+                          icon: const Icon(Icons.close, color: Colors.white),
+                          onPressed: onCloseVideo,
+                        ),
                       ),
-                      child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
-                    ),
+                    ],
+                  )
+                : Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        course.cover,
+                        width: width,
+                        height: height,
+                        fit: BoxFit.cover,
+                      ),
+                      GestureDetector(
+                        onTap: onPlay,
+                        child: Container(
+                          width: 64,
+                          height: 64,
+                          decoration: BoxDecoration(
+                            color: Colors.black38,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.play_arrow, color: Colors.white, size: 40),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+          ),
+          // 举报按钮，右上角
+          Positioned(
+            top: 8,
+            right: 8,
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                icon: const Icon(Icons.report, color: Colors.orange),
+                tooltip: 'Report',
+                onPressed: () => _showReportDialog(context),
               ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -497,8 +487,13 @@ class _VideoPlayerInlineState extends State<_VideoPlayerInline> {
     super.dispose();
   }
 
-  void _showControlsTemporarily() {
+  void _togglePlayPauseAndShowControls() {
     setState(() {
+      if (_controller.value.isPlaying) {
+        _controller.pause();
+      } else {
+        _controller.play();
+      }
       _showControls = true;
     });
     _hideTimer?.cancel();
@@ -526,7 +521,7 @@ class _VideoPlayerInlineState extends State<_VideoPlayerInline> {
     }
 
     return GestureDetector(
-      onTap: _showControlsTemporarily,
+      onTap: _togglePlayPauseAndShowControls,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -642,6 +637,170 @@ class _VideoPlayerInlineState extends State<_VideoPlayerInline> {
             const Icon(Icons.play_circle_fill, color: Colors.white, size: 56),
         ],
       ),
+    );
+  }
+}
+
+class _HorizontalCourseCard extends StatelessWidget {
+  final _Course course;
+  final VoidCallback onPlay;
+  const _HorizontalCourseCard({required this.course, required this.onPlay});
+
+  void _showReportDialog(BuildContext context) async {
+    final reasons = [
+      'Spam',
+      'Inappropriate Content',
+      'Harassment',
+      'Other',
+    ];
+    String? selectedReason;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => AlertDialog(
+          title: const Text('Report Work'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...reasons.map((reason) => RadioListTile<String>(
+                    title: Text(reason),
+                    value: reason,
+                    groupValue: selectedReason,
+                    onChanged: (val) {
+                      setState(() {
+                        selectedReason = val;
+                      });
+                    },
+                  )),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: selectedReason == null ? null : () => Navigator.pop(ctx, true),
+              child: const Text('Report'),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (confirmed == true && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Report submitted successfully.'), backgroundColor: Colors.orange),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: onPlay,
+          child: Container(
+            width: 120,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        course.cover,
+                        width: 120,
+                        height: 80,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned.fill(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.3),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: Center(
+                          child: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  child: Text(
+                    course.title.split(' ').take(3).join(' '),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: List.generate(5, (i) => Icon(
+                      i < course.rating ? Icons.star : Icons.star_border,
+                      color: const Color(0xFFFFB800),
+                      size: 18,
+                    )),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 4,
+          right: 4,
+          child: Material(
+            color: Colors.transparent,
+            child: IconButton(
+              icon: const Icon(Icons.report, color: Colors.orange, size: 20),
+              tooltip: 'Report',
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              onPressed: () => _showReportDialog(context),
+            ),
+          ),
+        ),
+      ],
     );
   }
 } 
